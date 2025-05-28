@@ -12,7 +12,7 @@ Route::prefix('auth')->group(function () {
     Route::middleware('jwt')->group(function () {
         Route::post('refresh', [AuthController::class, 'refresh']);
         Route::post('logout', [AuthController::class, 'logout']);
-        Route::post('me', [AuthController::class, 'me']);
+        Route::get('me', [AuthController::class, 'me']);
     });
 });
 
@@ -25,5 +25,5 @@ Route::middleware('jwt')->group(function () {
 });
 
 Route::get('/teste', function (Request $request) {
-    return response()->json(['message' => 'TESTEE2']);
+    return response()->json(['Estou diante do mauro ou ORuam?' => 'Ãnn ORuam']);
 });
