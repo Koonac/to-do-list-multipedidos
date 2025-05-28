@@ -3,37 +3,39 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Services\AuthService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
+    /**
+     * Serviço de autenticação
+     * 
+     * @var AuthService $service
+     */
+    protected $service;
 
     /**
-     * Get a JWT via given credentials.
+     * AuthController constructor
+     * 
+     * @param AuthService $service
+     */
+    public function __construct(AuthService $service)
+    {
+        $this->middleware('api')->except(['login', 'register']);
+        $this->service = $service;
+    }
+
+    /**
+     * Captura o usuário autenticado
      *
-     * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login(Request $request)
+    public function me()
     {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|string|email|max:255',
-            'password' => 'required|string|min:6',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-        }
-
-        if (!($token = auth('api')->attempt($request->all()))) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
-
-        return $this->respondWithToken($token);
+        $autenticatedUser = $this->service->getAutenticatedUser();
+        return response()->json($autenticatedUser);
     }
 
     /**
@@ -54,42 +56,40 @@ class AuthController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        $token = auth('api')->login($user);
-
-        return response()->json([
-            'user' => $user,
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth('api')->factory()->getTTL() * 60
-        ]);
+        $authUser = $this->service->register($request->all());
+        return response()->json($authUser);
     }
 
     /**
-     * Get the authenticated User.
+     * Loga o usuário
      *
+     * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function me()
+    public function login(Request $request)
     {
-        return response()->json(auth('api')->user());
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|string|email|max:255',
+            'password' => 'required|string|min:6',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        $login = $this->service->login($request->all());
+        return response()->json($login);
     }
 
     /**
-     * Log the user out (Invalidate the token).
+     * Desloga um usuário
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function logout()
     {
-        auth('api')->logout();
-
-        return response()->json(['message' => 'Successfully logged out']);
+        $logout = $this->service->logout();
+        return response()->json($logout);
     }
 
     /**
@@ -99,22 +99,7 @@ class AuthController extends Controller
      */
     public function refresh()
     {
-        return $this->respondWithToken(auth('api')->refresh());
-    }
-
-    /**
-     * Get the token array structure.
-     *
-     * @param  string $token
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    protected function respondWithToken($token)
-    {
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth('api')->factory()->getTTL() * 60
-        ]);
+        $refresh = $this->service->refresh();
+        return response()->json($refresh);
     }
 }
