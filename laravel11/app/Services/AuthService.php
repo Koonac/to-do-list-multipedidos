@@ -31,7 +31,7 @@ class AuthService
      * 
      * @return Authenticatable|null
      */
-    public function getAutenticatedUser(): ?Authenticatable
+    public function getAuthenticatedUser(): ?Authenticatable
     {
         return auth('api')->user();
     }
@@ -94,7 +94,7 @@ class AuthService
     public function refresh(): array
     {
         $token = auth('api')->refresh();
-        
+
         return $this->formatTokenArray($token);
     }
 

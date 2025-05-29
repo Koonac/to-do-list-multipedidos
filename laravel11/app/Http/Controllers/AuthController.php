@@ -23,7 +23,7 @@ class AuthController extends Controller
      */
     public function __construct(AuthService $service)
     {
-        $this->middleware('api')->except(['login', 'register']);
+        $this->middleware('jwt')->except(['login', 'register']);
         $this->service = $service;
     }
 
@@ -34,8 +34,8 @@ class AuthController extends Controller
      */
     public function me()
     {
-        $autenticatedUser = $this->service->getAutenticatedUser();
-        return response()->json($autenticatedUser);
+        $authenticatedUser = $this->service->getAuthenticatedUser();
+        return response()->json($authenticatedUser);
     }
 
     /**

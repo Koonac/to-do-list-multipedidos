@@ -22,7 +22,7 @@ class TaskController extends Controller
      */
     public function __construct(TaskService $service)
     {
-        $this->middleware('api');
+        $this->middleware('jwt');
         $this->service = $service;
     }
 
