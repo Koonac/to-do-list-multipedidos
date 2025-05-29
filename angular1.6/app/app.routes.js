@@ -1,15 +1,15 @@
 angular.module("todoApp").config(function ($routeProvider) {
   $routeProvider
-    .when("/", {
-      templateUrl: "app/views/home.html",
-      controller: "HomeController",
+    .when("/home", {
+      template: "<home></home>",
     })
-    .when("/login", {
-      templateUrl: "app/views/auth/login.html",
+    .when("/", {
+      template: "<login></login>",
+      templateUrl: "app/pages/auth/login.html",
       controller: "LoginController",
     })
     .when("/tasks", {
-      templateUrl: "app/views/tasks/index.html",
+      templateUrl: "app/pages/task/index.html",
       controller: "TaskController",
     })
     .otherwise({ redirectTo: "/login" });

@@ -12,7 +12,6 @@ angular
           $location.path("/tasks");
         })
         .catch(() => {
-          console.error("Deu ruim aqui no login");
           $scope.error = "Usuário ou senha inválidos.";
         });
     };

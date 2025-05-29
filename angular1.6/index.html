@@ -2,10 +2,13 @@
 <html ng-app="todoApp">
   <head>
     <meta charset="utf-8" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <title>To-Do App</title>
   </head>
   <body>
-    <div ng-view></div>
+    <div class="p-2">
+      <div ng-view></div>
+    </div>
 
     <!-- AngularJS -->
     <script src="node_modules/angular/angular.js"></script>
@@ -15,16 +18,22 @@
     <script src="app/app.module.js"></script>
     <script src="app/app.routes.js"></script>
 
+    <!-- Core -->
+    <script src="app/core/request.interceptor.js"></script>
+
     <!-- Auth -->
-    <script src="app/services/auth/auth.service.js"></script>
-    <script src="app/services/auth/auth.interceptor.js"></script>
-    <script src="app/controllers/auth/login.controller.js"></script>
+    <script src="app/pages/auth/services/auth.service.js"></script>
+    <script src="app/pages/auth/controllers/login.controller.js"></script>
+    <script src="app/pages/auth/components/login.component.js"></script>
 
     <!-- Home -->
-    <script src="app/controllers/home.controller.js"></script>
+    <script src="app/pages/home/controllers/home.controller.js"></script>
+    <script src="app/pages/home/components/home.component.js"></script>
+    <script src="app/pages/home/components/home-list.component.js"></script>
+    <script src="app/pages/home/components/home-card.component.js"></script>
 
     <!-- Task -->
-    <script src="app/controllers/task.controller.js"></script>
-    <script src="app/services/task.service.js"></script>
+    <script src="app/pages/task/controllers/task.controller.js"></script>
+    <script src="app/pages/task/services/task.service.js"></script>
   </body>
 </html>

@@ -11,7 +11,7 @@
  *  - Se der certo, refaz a requisição original ($http(response.config)).
  *  - Se falhar, faz logout e redireciona para /login.
  */
-angular.module("todoApp").factory("AuthInterceptor", function ($q, $injector) {
+angular.module("todoApp").factory("RequestInterceptor", function ($q, $injector) {
   return {
     request: function (config) {
       const AuthService = $injector.get("AuthService");
