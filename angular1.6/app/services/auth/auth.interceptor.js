@@ -19,6 +19,7 @@ angular.module("todoApp").factory("AuthInterceptor", function ($q, $injector) {
       if (token) {
         config.headers["Authorization"] = "Bearer " + token;
       }
+      config.headers["Accept"] = "application/json";
       return config;
     },
 

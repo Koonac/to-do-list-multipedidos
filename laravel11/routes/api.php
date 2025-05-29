@@ -25,5 +25,6 @@ Route::middleware('jwt')->group(function () {
 });
 
 Route::get('/teste', function (Request $request) {
+    abort(500, 'teste');
     return response()->json(['Estou diante do mauro ou ORuam?' => 'Ãnn ORuam']);
 });

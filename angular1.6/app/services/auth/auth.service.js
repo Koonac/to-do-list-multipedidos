@@ -114,7 +114,7 @@ angular
       const timeUntilRefresh = exp - now - minBeforeExp;
 
       console.log(
-        "scheduleTokenRefresh" + exp,
+        "scheduleTokenRefresh " + exp,
         now,
         minBeforeExp,
         timeUntilRefresh
@@ -122,6 +122,7 @@ angular
 
       if (timeUntilRefresh > 0) {
         refreshTimer = $timeout(() => {
+          console.log("RENOVANDO TOKEN KARAIO", exp);
           refreshToken();
         }, timeUntilRefresh);
       }
@@ -137,16 +138,12 @@ angular
       }
     }
 
-    // Quando o serviço iniciar, agenda um refresh se o token for válido
-    if (isAuthenticated()) {
-      // scheduleTokenRefresh();
-    }
-
     return {
       getToken,
       isAuthenticated,
       login,
       logout,
       refreshToken,
+      scheduleTokenRefresh,
     };
   });
