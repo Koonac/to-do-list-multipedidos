@@ -68,7 +68,6 @@ angular
           saveToken(res.data.access_token, res.data.expires_in);
         })
         .catch((err) => {
-          console.error(err);
           return $q.reject(err);
         });
     }
@@ -121,16 +120,8 @@ angular
       const minBeforeExp = 5 * 60 * 1000; // 5 minutos antes do expirar
       const timeUntilRefresh = exp - now - minBeforeExp;
 
-      console.log(
-        "scheduleTokenRefresh " + exp,
-        now,
-        minBeforeExp,
-        timeUntilRefresh
-      );
-
       if (timeUntilRefresh > 0) {
         refreshTimer = $timeout(() => {
-          console.log("RENOVANDO TOKEN KARAIO", exp);
           refreshToken();
         }, timeUntilRefresh);
       }

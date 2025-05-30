@@ -2,8 +2,8 @@ angular
   .module("todoApp")
   .controller("LoginController", function ($scope, $location, AuthService) {
     $scope.credentials = {
-      email: "konac@outlook.com.br",
-      password: "123456",
+      email: "",
+      password: "",
     };
 
     $scope.login = function () {

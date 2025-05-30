@@ -24,7 +24,6 @@ angular.module("todoApp").component("taskNewForm", {
         })
         .catch((err) => {
           this.error = err.data.message ?? err.data;
-          console.error(err);
         });
     };
   },

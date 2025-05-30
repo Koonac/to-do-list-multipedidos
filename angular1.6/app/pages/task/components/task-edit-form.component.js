@@ -30,7 +30,6 @@ angular.module("todoApp").component("taskEditForm", {
         })
         .catch((err) => {
           this.error = err.data.message ?? err.data;
-          console.error(err);
         });
     };
   },
