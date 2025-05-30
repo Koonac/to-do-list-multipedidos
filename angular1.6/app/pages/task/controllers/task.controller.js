@@ -4,7 +4,7 @@ angular
     "TaskController",
     function ($scope, TaskService, AuthService, $location, $http) {
       if (!AuthService.isAuthenticated()) {
-        $location.path("/login");
+        $location.path("/");
         return;
       }
 
@@ -13,11 +13,11 @@ angular
       $scope.newTask = {};
       $scope.editingTask = null;
 
-      function loadTasks() {
+      $scope.loadTasks = function () {
         TaskService.all().then((res) => {
           $scope.tasks = res.data;
         });
-      }
+      };
 
       $scope.addTask = function ($event) {
         if (!$scope.newTask.title && !$scope.newTask.due_date) return;
@@ -32,7 +32,7 @@ angular
         TaskService.create(data)
           .then(() => {
             $scope.newTask = {};
-            loadTasks();
+            $scope.loadTasks();
           })
           .catch((err) => {
             $scope.error = err.data.message ?? err.data;
@@ -49,7 +49,7 @@ angular
         TaskService.update($scope.editingTask.id, $scope.editingTask).then(
           () => {
             $scope.editingTask = null;
-            loadTasks();
+            $scope.loadTasks();
           }
         );
       };
@@ -60,26 +60,10 @@ angular
 
       $scope.deleteTask = function (id) {
         TaskService.delete(id).then(() => {
-          loadTasks();
+          $scope.loadTasks();
         });
       };
 
-      $scope.toggleDone = function (task) {
-        TaskService.update(task.id, {
-          title: task.title,
-          description: task.description,
-          due_date: task.due_date,
-          is_done: !task.is_done,
-        }).then(() => {
-          loadTasks();
-        });
-      };
-
-      $scope.logout = function () {
-        AuthService.logout();
-        $location.path("/login");
-      };
-
-      loadTasks();
+      $scope.loadTasks();
     }
   );

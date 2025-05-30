@@ -1,14 +1,22 @@
 <!DOCTYPE html>
-<html ng-app="todoApp">
+<html ng-app="todoApp" ng-controller="LayoutController as layout">
   <head>
     <meta charset="utf-8" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <title>To-Do App</title>
   </head>
   <body>
-    <div class="p-2 h-screen flex text-zinc-100 text-[20px]">
+    <div
+      ng-if="layout.isLoginPage"
+      class="p-2 h-screen flex text-zinc-100 text-[20px]"
+    >
       <div ng-view></div>
     </div>
+
+    <div
+      ng-if="!layout.isLoginPage"
+      ng-include="'app/layout/default.html'"
+    ></div>
 
     <!-- AngularJS -->
     <script src="node_modules/angular/angular.js"></script>
@@ -20,6 +28,9 @@
 
     <!-- Core -->
     <script src="app/core/request.interceptor.js"></script>
+
+    <!-- Layout -->
+    <script src="app/layout/controllers/layout.controller.js"></script>
 
     <!-- Auth -->
     <script src="app/pages/auth/services/auth.service.js"></script>
@@ -33,7 +44,9 @@
     <script src="app/pages/home/components/home-card.component.js"></script>
 
     <!-- Task -->
-    <script src="app/pages/task/controllers/task.controller.js"></script>
     <script src="app/pages/task/services/task.service.js"></script>
+    <script src="app/pages/task/controllers/task.controller.js"></script>
+    <script src="app/pages/task/components/task.component.js"></script>
+    <script src="app/pages/task/components/task-card.component.js"></script>
   </body>
 </html>

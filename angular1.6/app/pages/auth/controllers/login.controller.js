@@ -10,7 +10,7 @@ angular
       $scope.error = "";
       AuthService.login($scope.credentials)
         .then(() => {
-          $location.path("/tasks");
+          $location.path("/tarefas");
         })
         .catch(() => {
           $scope.error = "Usuário ou senha inválidos.";

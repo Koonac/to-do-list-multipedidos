@@ -33,18 +33,14 @@ angular
 
         if (
           response.status === 401 &&
-          !response.config.__isRetryRequest &&
+          !response.config.url.includes('refresh') &&
           Boolean(token)
         ) {
-          console.log("[RequestInterceptor] ERRO SUPREMO");
           return AuthService.refreshToken()
             .then(() => {
-              response.config.__isRetryRequest = true;
-              console.log("[RequestInterceptor] SUCESSO");
               return $http(response.config); // retry original request
             })
             .catch(() => {
-              console.log("[RequestInterceptor] ERRORR");
               AuthService.logout();
               $location.path("/");
               return $q.reject(response);

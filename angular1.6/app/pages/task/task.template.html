@@ -16,20 +16,8 @@
     <button type="button" ng-click="cancelEdit()">Cancelar</button>
   </form>
 
-  <ul>
-    <li ng-repeat="task in tasks">
-      <span ng-class="{'done': task.is_done}"
-        >{{ task.title }} ({{ task.due_date }})</span
-      >
-      <button ng-click="editTask(task)">Editar</button>
-      <button ng-click="deleteTask(task.id)">Excluir</button>
-      <button ng-click="toggleDone(task)">
-        {{ task.is_done ? 'Desmarcar' : 'Concluir' }}
-      </button>
-    </li>
-  </ul>
+  <task-card ng-repeat="task in tasks" task="task"></task-card>
 
-  <button class="bg-red-500" ng-click="logout()">Sair</button>
 </div>
 
 <style></style>

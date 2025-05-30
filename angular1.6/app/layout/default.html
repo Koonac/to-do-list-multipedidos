@@ -1,0 +1,80 @@
+<header class="">
+  <div class="px-4 py-1 bg-linear-to-tr from-[#FF6400] to-[#f03a05]">
+    <nav class="flex flex-col lg:flex-row gap-4">
+      <div class="flex items-center w-full lg:w-auto justify-between">
+        <div class="block lg:hidden">
+          <button
+            ng-click="layout.toggleHideMenu()"
+            class="cursor-pointer flex items-center px-3 py-2 border rounded text-black border-black hover:text-black hover:border-black"
+          >
+            <svg
+              class="fill-current h-6 w-6"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <title>Menu</title>
+              <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+            </svg>
+          </button>
+        </div>
+        <div>
+          <img
+            src="app/assets/images/logo-curto-branco.png"
+            alt="logo-branco"
+            class="w-24"
+          />
+        </div>
+      </div>
+      <div
+        id="main-nav"
+        ng-class="{'hidden': layout.hideMenu}"
+        class="w-full flex-grow lg:flex text-sm gap-1 lg:gap-4 mt-2 animated jackinthebox"
+      >
+        <button
+          ng-click="layout.redirecionar('inicio')"
+          ng-class="(layout.path.includes('inicio')) ? 'text-zinc-100' : 'text-zinc-900'"
+          class="cursor-pointer block lg:inline-block text-start lg:text-center text-[18px] font-bold sm:hover:border-indigo-400 hover:text-zinc-100 p-1 hover:bg-[#16b0b6] sm:hover:bg-transparent rounded-lg"
+        >
+          Home
+        </button>
+        <button
+          ng-click="layout.redirecionar('tarefas')"
+          ng-class="(layout.path.includes('tarefas')) ? 'text-zinc-100' : 'text-zinc-900'"
+          class="cursor-pointer block lg:inline-block text-start lg:text-center text-[18px] font-bold sm:hover:border-indigo-400 hover:text-zinc-100 p-1 hover:bg-[#16b0b6] sm:hover:bg-transparent rounded-lg"
+        >
+          Tarefas
+        </button>
+        <button
+          ng-click="layout.redirecionar('usuario')"
+          ng-class="(layout.path.includes('usuario')) ? 'text-zinc-100' : 'text-zinc-900'"
+          class="cursor-pointer block lg:inline-block text-start lg:text-center text-[18px] font-bold sm:hover:border-indigo-400 hover:text-zinc-100 p-1 hover:bg-[#16b0b6] sm:hover:bg-transparent rounded-lg"
+        >
+          Usuário
+        </button>
+        <button
+          ng-click="layout.logout()"
+          class="cursor-pointer lg:hidden w-full text-zinc-900 text-start text-[18px] font-bold hover:text-zinc-100 p-1 pt-2 mt-2 border-t border-white"
+        >
+          Sair
+        </button>
+      </div>
+      <div class="hidden lg:flex items-center">
+        <button
+          class="cursor-pointer bg-red-500 text-zinc-100 border border-white/20 rounded-md p-1 hover:bg-zinc-100 hover:text-red-500 transition-all"
+          ng-click="layout.logout()"
+        >
+          <img
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNiIgaGVpZ2h0PSIzNiIgdmlld0JveD0iMCAwIDI0IDI0Ij48ZyBmaWxsPSJub25lIj48cGF0aCBkPSJtMTIuNTkzIDIzLjI1OGwtLjAxMS4wMDJsLS4wNzEuMDM1bC0uMDIuMDA0bC0uMDE0LS4wMDRsLS4wNzEtLjAzNXEtLjAxNi0uMDA1LS4wMjQuMDA1bC0uMDA0LjAxbC0uMDE3LjQyOGwuMDA1LjAybC4wMS4wMTNsLjEwNC4wNzRsLjAxNS4wMDRsLjAxMi0uMDA0bC4xMDQtLjA3NGwuMDEyLS4wMTZsLjAwNC0uMDE3bC0uMDE3LS40MjdxLS4wMDQtLjAxNi0uMDE3LS4wMThtLjI2NS0uMTEzbC0uMDEzLjAwMmwtLjE4NS4wOTNsLS4wMS4wMWwtLjAwMy4wMTFsLjAxOC40M2wuMDA1LjAxMmwuMDA4LjAwN2wuMjAxLjA5M3EuMDE5LjAwNS4wMjktLjAwOGwuMDA0LS4wMTRsLS4wMzQtLjYxNHEtLjAwNS0uMDE4LS4wMi0uMDIybS0uNzE1LjAwMmEuMDIuMDIgMCAwIDAtLjAyNy4wMDZsLS4wMDYuMDE0bC0uMDM0LjYxNHEuMDAxLjAxOC4wMTcuMDI0bC4wMTUtLjAwMmwuMjAxLS4wOTNsLjAxLS4wMDhsLjAwNC0uMDExbC4wMTctLjQzbC0uMDAzLS4wMTJsLS4wMS0uMDF6Ii8+PHBhdGggZmlsbD0iY3VycmVudENvbG9yIiBkPSJNMTIgM2ExIDEgMCAwIDEgLjExNyAxLjk5M0wxMiA1SDdhMSAxIDAgMCAwLS45OTMuODgzTDYgNnYxMmExIDEgMCAwIDAgLjg4My45OTNMNyAxOWg0LjVhMSAxIDAgMCAxIC4xMTcgMS45OTNMMTEuNSAyMUg3YTMgMyAwIDAgMS0yLjk5NS0yLjgyNEw0IDE4VjZhMyAzIDAgMCAxIDIuODI0LTIuOTk1TDcgM3ptNS43MDcgNS40NjRsMi44MjggMi44MjlhMSAxIDAgMCAxIDAgMS40MTRsLTIuODI4IDIuODI5YTEgMSAwIDEgMS0xLjQxNC0xLjQxNUwxNy40MTQgMTNIMTJhMSAxIDAgMSAxIDAtMmg1LjQxNGwtMS4xMjEtMS4xMjFhMSAxIDAgMCAxIDEuNDE0LTEuNDE1Ii8+PC9nPjwvc3ZnPg=="
+            alt="exit-icon"
+          />
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main class="p-2 md:p-5">
+  <div ng-view></div>
+</main>
+
+<footer></footer>
