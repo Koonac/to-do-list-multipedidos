@@ -1,4 +1,4 @@
-<div class="task-container">
+<div class="text-black">
   <h2>Minhas Tarefas</h2>
   {{error}}
   <form ng-submit="addTask()" ng-if="!editingTask">
@@ -32,20 +32,4 @@
   <button class="bg-red-500" ng-click="logout()">Sair</button>
 </div>
 
-<style>
-  .task-container {
-    max-width: 500px;
-    margin: auto;
-  }
-  .done {
-    text-decoration: line-through;
-    color: green;
-  }
-  input {
-    display: block;
-    margin-bottom: 5px;
-  }
-  button {
-    margin-right: 5px;
-  }
-</style>
+<style></style>

@@ -11,37 +11,47 @@
  *  - Se der certo, refaz a requisição original ($http(response.config)).
  *  - Se falhar, faz logout e redireciona para /login.
  */
-angular.module("todoApp").factory("RequestInterceptor", function ($q, $injector) {
-  return {
-    request: function (config) {
-      const AuthService = $injector.get("AuthService");
-      const token = AuthService.getToken();
-      if (token) {
-        config.headers["Authorization"] = "Bearer " + token;
-      }
-      config.headers["Accept"] = "application/json";
-      return config;
-    },
+angular
+  .module("todoApp")
+  .factory("RequestInterceptor", function ($q, $injector) {
+    return {
+      request: function (config) {
+        const AuthService = $injector.get("AuthService");
+        const token = AuthService.getToken();
+        if (token) {
+          config.headers["Authorization"] = "Bearer " + token;
+        }
+        config.headers["Accept"] = "application/json";
+        return config;
+      },
 
-    responseError: function (response) {
-      const AuthService = $injector.get("AuthService");
-      const $http = $injector.get("$http");
-      const $location = $injector.get("$location");
+      responseError: function (response) {
+        const AuthService = $injector.get("AuthService");
+        const token = AuthService.getToken();
+        const $http = $injector.get("$http");
+        const $location = $injector.get("$location");
 
-      if (response.status === 401 && !response.config.__isRetryRequest) {
-        return AuthService.refreshToken()
-          .then(() => {
-            response.config.__isRetryRequest = true;
-            return $http(response.config); // retry original request
-          })
-          .catch(() => {
-            AuthService.logout();
-            $location.path("/login");
-            return $q.reject(response);
-          });
-      }
+        if (
+          response.status === 401 &&
+          !response.config.__isRetryRequest &&
+          Boolean(token)
+        ) {
+          console.log("[RequestInterceptor] ERRO SUPREMO");
+          return AuthService.refreshToken()
+            .then(() => {
+              response.config.__isRetryRequest = true;
+              console.log("[RequestInterceptor] SUCESSO");
+              return $http(response.config); // retry original request
+            })
+            .catch(() => {
+              console.log("[RequestInterceptor] ERRORR");
+              AuthService.logout();
+              $location.path("/");
+              return $q.reject(response);
+            });
+        }
 
-      return $q.reject(response);
-    },
-  };
-});
+        return $q.reject(response);
+      },
+    };
+  });

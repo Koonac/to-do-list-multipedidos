@@ -59,7 +59,7 @@ angular
       };
 
       $scope.deleteTask = function (id) {
-        TaskService.remove(id).then(() => {
+        TaskService.delete(id).then(() => {
           loadTasks();
         });
       };

@@ -7,6 +7,7 @@ angular
     };
 
     $scope.login = function () {
+      $scope.error = "";
       AuthService.login($scope.credentials)
         .then(() => {
           $location.path("/tasks");

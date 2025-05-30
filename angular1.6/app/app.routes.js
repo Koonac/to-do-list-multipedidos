@@ -12,5 +12,5 @@ angular.module("todoApp").config(function ($routeProvider) {
       templateUrl: "app/pages/task/index.html",
       controller: "TaskController",
     })
-    .otherwise({ redirectTo: "/login" });
+    .otherwise({ redirectTo: "/" });
 });

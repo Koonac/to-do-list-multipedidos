@@ -1,14 +1,51 @@
-<div class="login-container">
-  <h2>Login</h2>
-  <form ng-submit="login()">
-    <label>Email</label>
-    <input type="email" ng-model="credentials.email" required>
-
-    <label>Senha</label>
-    <input type="password" ng-model="credentials.password" required>
-
-    <button type="submit">Entrar</button>
-
-    <p class="error" ng-if="error">{{ error }}</p>
-  </form>
+<div class="w-full h-full flex items-center justify-center">
+  <div
+    class="w-full md:w-3/6 xl:w-2/6 bg-linear-to-b from-[#FF6400] to-[#f03a05] rounded-lg border border-black/20 shadow-lg shadow-[#FF6400] p-4"
+  >
+    <div>
+      <img src="app/assets/images/logo-branco.png" alt="logo-branco" />
+    </div>
+    <form ng-submit="login()" class="p-4 space-y-2">
+      <div class="flex flex-col">
+        <div>
+          <label for="email" class="text-sm font-medium">E-mail</label>
+          <input
+            type="text"
+            id="email"
+            ng-model="credentials.email"
+            class="bg-zinc-100 border border-zinc-200 text-zinc-800 text-sm rounded-lg block w-full p-2 focus:ring-zinc-400 focus:border-zinc-400 outline outline-0"
+            placeholder="example@example.com"
+            required
+          />
+        </div>
+        <div class="">
+          <label for="senha" class="text-sm font-medium">Senha</label>
+          <input
+            type="password"
+            id="senha"
+            ng-model="credentials.password"
+            class="bg-zinc-100 border border-zinc-200 text-zinc-800 text-sm rounded-lg block w-full p-2 focus:ring-zinc-400 focus:border-zinc-400 outline outline-0"
+            placeholder="****"
+            required
+          />
+        </div>
+      </div>
+      <div>
+        <button
+          class="w-full cursor-pointer rounded-lg bg-gradient-to-tr from-[#0e6e71] to-[#16b0b6] py-2 px-4 text-[18px] font-semibold text-white shadow-md shadow-[#0e6e71]/20 transition-all hover:shadow-lg hover:shadow-[#0e6e71]/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+          type="submit"
+        >
+          Entrar
+        </button>
+      </div>
+      <div>
+        <p
+          class="text-sm py-1 px-2 bg-red-600 border-red-700 shadow-red-700 rounded-lg"
+          ng-if="error"
+        >
+          - {{ error }}
+        </p>
+      </div>
+    </form>
+  </div>
 </div>
