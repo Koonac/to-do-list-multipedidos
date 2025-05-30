@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile
     container_name: laravel-app
     volumes:
-      - ./laravel11:/var/www
+      # - ./laravel11:/var/www
       - ./docker/php/www.conf:/usr/local/etc/php-fpm.d/www.conf
     depends_on:
       - mysql

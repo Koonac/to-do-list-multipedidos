@@ -21,7 +21,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www
 
 # Copia projeto (Descomente isso para deixar a aplicação mais rápida)
-# COPY . /var/www
+COPY . /var/www
 
 # Permissões
 RUN chown -R www-data:www-data /var/www \

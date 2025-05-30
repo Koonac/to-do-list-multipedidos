@@ -3,11 +3,6 @@ angular
   .controller(
     "TaskController",
     function ($scope, TaskService, AuthService, UtilsService, $location) {
-      if (!AuthService.isAuthenticated()) {
-        $location.path("/");
-        return;
-      }
-
       $scope.loading = false;
       $scope.filter = "in_progress";
       $scope.tasks = [];
