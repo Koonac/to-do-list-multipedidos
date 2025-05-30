@@ -24,6 +24,8 @@ Uma aplicação web de lista de tarefas construída com **Laravel 11** (API REST
 - PHP 8.2
 - Clean Architecture + princípios SOLID
 
+---
+
 ## 📦 Como rodar o projeto (via Docker)
 
 ### 🔧 1. Clonar o repositório
@@ -79,8 +81,21 @@ npm install
 ```
 
 ---
-npm install em /angular1.6
 
-composer install em /laravel11
+## 🔐 Autenticação
+A autenticação é baseada em JWT. Após login, o token é armazenado no localStorage e enviado automaticamente nas requisições protegidas.
 
-docker-compose up --build
+---
+
+## 🧪 Testes
+Para rodar os testes de api no laravel.
+
+Acesse o container do Laravel
+```bash
+docker exec -it laravel-app bash
+```
+
+Dentro do container, rode:
+```bash
+php artisan test
+```
