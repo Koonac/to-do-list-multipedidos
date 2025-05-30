@@ -1,49 +1,79 @@
-<div class="flex flex-col">
-  {{$ctrl.task}}
-  <div class="">
-    <label
-      class="relative text-[#008080] flex cursor-pointer items-center justify-start gap-[2em]"
-      for="tick-{{$ctrl.task.id}}"
-    >
-      <input
-        class="peer appearance-none"
-        id="tick-{{$ctrl.task.id}}"
-        name="tick-{{$ctrl.task.id}}"
-        type="checkbox"
-        ng-click="$ctrl.toggleDone($ctrl.task)"
-        ng-checked="$ctrl.task.is_done"
-      />
-      <span
-        class="absolute left-0 top-1/2 h-[1.5em] w-[1.5em] -translate-x-0 -translate-y-1/2 rounded-[0.25em] border-[2px] border-[#008080]"
+<div
+  class="flex bg-white border border-zinc-900/10 rounded-lg shadow-md overflow-hidden text-zinc-700"
+>
+  <div class="w-1.5 bg-[#16b0b6]"></div>
+  <div class="flex p-5 gap-4 w-full">
+    <div class="w-[1.5em] flex items-center">
+      <label class="relative cursor-pointer" for="tick-{{$ctrl.task.id}}">
+        <input
+          class="peer appearance-none"
+          id="tick-{{$ctrl.task.id}}"
+          name="tick-{{$ctrl.task.id}}"
+          type="checkbox"
+          ng-click="$ctrl.toggleDone($ctrl.task)"
+          ng-checked="$ctrl.task.is_done"
+        />
+        <span
+          class="absolute left-0 top-1/2 h-[1.5em] w-[1.5em] -translate-x-0 -translate-y-1/2 rounded-[0.25em] border-[2px] border-zinc-700"
+        >
+        </span>
+        <svg
+          viewBox="0 0 69 89"
+          class="absolute left-0 top-1/2 h-[1.5em] w-[1.5em] -translate-x-0 -translate-y-1/2 duration-500 ease-out [stroke-dasharray:100] [stroke-dashoffset:100] peer-checked:[stroke-dashoffset:0]"
+          fill="none"
+          height="89"
+          width="69"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M.93 63.984c3.436.556 7.168.347 10.147 2.45 4.521 3.19 10.198 8.458 13.647 12.596 1.374 1.65 4.181 5.922 5.598 8.048.267.4-1.31.823-1.4.35-5.744-30.636 9.258-59.906 29.743-81.18C62.29 2.486 63.104 1 68.113 1"
+            stroke-width="6px"
+            stroke="#FF6400"
+            pathLength="100"
+          ></path>
+        </svg>
+      </label>
+    </div>
+    <div class="flex flex-col w-full">
+      <p
+        class="text-[18px] font-semibold peer-checked:line-through decoration-[#FF6400]"
       >
-      </span>
-      <svg
-        viewBox="0 0 69 89"
-        class="absolute left-0 top-1/2 h-[1.5em] w-[1.5em] -translate-x-0 -translate-y-1/2 duration-500 ease-out [stroke-dasharray:100] [stroke-dashoffset:100] peer-checked:[stroke-dashoffset:0]"
-        fill="none"
-        height="89"
-        width="69"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M.93 63.984c3.436.556 7.168.347 10.147 2.45 4.521 3.19 10.198 8.458 13.647 12.596 1.374 1.65 4.181 5.922 5.598 8.048.267.4-1.31.823-1.4.35-5.744-30.636 9.258-59.906 29.743-81.18C62.29 2.486 63.104 1 68.113 1"
-          stroke-width="6px"
-          stroke="#008080"
-          pathLength="100"
-        ></path>
-      </svg>
+        {{$ctrl.task.title}}
+      </p>
 
       <p
-        class="text-[1em] font-bold [user-select:none] peer-checked:text-red-400"
+        class="text-[16px] text-zinc-700/50 peer-checked:line-through decoration-[#FF6400]"
       >
-        Stare at Your Crush
+        {{$ctrl.task.due_date}}
       </p>
-    </label>
-  </div>
 
-  <span ng-class="{'done': $ctrl.task.is_done}">
-    {{ $ctrl.task.title }} ({{ $ctrl.task.due_date }})
-  </span>
-  <button ng-click="editTask(task)">Editar</button>
-  <button ng-click="deleteTask($ctrl.task.id)">Excluir</button>
+      <p
+        class="text-[16px] text-zinc-700/50 peer-checked:line-through decoration-[#FF6400]"
+      >
+        {{$ctrl.task.description}}
+      </p>
+    </div>
+    <div class="flex items-center gap-2">
+      <button
+        class="bg-yellow-400/50 block px-2 py-1 border border-yellow-400 rounded-lg cursor-pointer transition-all hover:border-yellow-700/50 hover:bg-yellow-500/50"
+        ng-click="editTask(task)"
+      >
+        <img
+          class="w-[30px] h-[30px]"
+          src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48ZyBmaWxsPSJub25lIiBzdHJva2U9IiNkMDg3MDAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIyIj48cGF0aCBkPSJtMTYuNDc1IDUuNDA4bDIuMTE3IDIuMTE3bS0uNzU2LTMuOTgyTDEyLjEwOSA5LjI3YTIuMSAyLjEgMCAwIDAtLjU4IDEuMDgyTDExIDEzbDIuNjQ4LS41M2MuNDEtLjA4Mi43ODYtLjI4MyAxLjA4Mi0uNTc5bDUuNzI3LTUuNzI3YTEuODUzIDEuODUzIDAgMSAwLTIuNjIxLTIuNjIxIi8+PHBhdGggZD0iTTE5IDE1djNhMiAyIDAgMCAxLTIgMkg2YTIgMiAwIDAgMS0yLTJWN2EyIDIgMCAwIDEgMi0yaDMiLz48L2c+PC9zdmc+"
+          alt="edit-icon"
+        />
+      </button>
+      <button
+        class="bg-red-400/50 block px-2 py-1 border border-red-400 rounded-lg cursor-pointer transition-all hover:border-red-700/50 hover:bg-red-500/50"
+        ng-click="deleteTask($ctrl.task.id)"
+      >
+        <img
+          class="w-[30px] h-[30px]"
+          src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48ZyBmaWxsPSJub25lIiBzdHJva2U9IiNlNzAwMGIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiPjxwYXRoIGQ9Ik01LjQ3IDYuMDE1djEyLjUxNGEyLjcyIDIuNzIgMCAwIDAgMi43MjEgMi43MjFoNy42MThhMi43MiAyLjcyIDAgMCAwIDIuNzItMi43MlY2LjAxNG0tMTUuMjM1LjAwMWgxNy40MTIiLz48cGF0aCBkPSJNOC43MzUgNi4wMTVWNC4zODJhMS42MyAxLjYzIDAgMCAxIDEuNjMzLTEuNjMyaDMuMjY0YTEuNjMgMS42MyAwIDAgMSAxLjYzMyAxLjYzMnYxLjYzM005LjgyNCAxNi45OTJ2LTUuNDM5bTQuMzUzIDUuNDM5di01LjQzOSIvPjwvZz48L3N2Zz4="
+          alt="trash-icon"
+        />
+      </button>
+    </div>
+  </div>
 </div>
