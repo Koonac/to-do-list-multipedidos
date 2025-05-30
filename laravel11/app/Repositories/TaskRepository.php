@@ -11,11 +11,16 @@ class TaskRepository
      * Lista todas as tarefas de um usuário
      * 
      * @param int $userId
+     * @param bool|null $userId
      * @return Collection<int, Task>
      */
-    public function getAllByUser(int $userId): Collection
+    public function getAllByUser(int $userId, bool|null $isDone = null): Collection
     {
-        return Task::where('user_id', $userId)->get();
+        $query = Task::where('user_id', $userId);
+        if ($isDone !== null) $query->where('is_done', $isDone);
+        $query->orderBy('due_date', 'desc');
+        $query->orderBy('id', 'desc');
+        return $query->get();
     }
 
     /**

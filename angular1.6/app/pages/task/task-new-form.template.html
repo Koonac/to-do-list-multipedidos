@@ -1,0 +1,50 @@
+{{$ctrl.error}}
+<form
+  ng-submit="$ctrl.addTask()"
+  class="bg-white p-4 border border-zinc-900/10 rounded-lg shadow-md space-y-2"
+>
+  <h2 class="text-[17px] font-semibold">Insira uma nova tarefa</h2>
+  <div class="flex flex-col lg:flex-row gap-2">
+    <div class="flex flex-col gap-2 w-full">
+      <div class="flex flex-col lg:flex-row gap-2">
+        <div class="w-full">
+          <input
+            type="text"
+            id="titulo"
+            ng-model="$ctrl.newTask.title"
+            class="bg-zinc-100 border border-zinc-200 text-zinc-800 text-sm rounded-lg block w-full p-2 focus:ring-zinc-400 focus:border-zinc-400 outline outline-0"
+            placeholder="Título"
+            required
+          />
+        </div>
+
+        <div>
+          <input
+            type="date"
+            id="titulo"
+            ng-model="$ctrl.newTask.due_date"
+            class="bg-zinc-100 border border-zinc-200 text-zinc-800 text-sm rounded-lg block w-full p-2 focus:ring-zinc-400 focus:border-zinc-400 outline outline-0"
+            required
+          />
+        </div>
+      </div>
+      <div>
+        <textarea
+          id="descricao"
+          class="bg-zinc-100 border border-zinc-200 text-zinc-800 text-sm rounded-lg block w-full p-2 focus:ring-zinc-400 focus:border-zinc-400 outline outline-0"
+          placeholder="Descreva a tarefa..."
+          ng-model="$ctrl.newTask.description"
+          rows="2"
+        ></textarea>
+      </div>
+    </div>
+    <div class="flex-1">
+      <button
+        class="w-full cursor-pointer rounded-lg bg-gradient-to-tr from-[#0e6e71] to-[#16b0b6] py-1.5 px-4 text-[18px] font-semibold text-white shadow-md shadow-[#0e6e71]/20 transition-all hover:shadow-lg hover:shadow-[#0e6e71]/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+        type="submit"
+      >
+        Adicionar
+      </button>
+    </div>
+  </div>
+</form>

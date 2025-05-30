@@ -29,11 +29,13 @@ class TaskController extends Controller
     /**
      * Retorna todas as tarefas do usuário
      *
+     * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function all()
+    public function all(Request $request)
     {
-        return response()->json($this->service->listUserTasks());
+        $isDone = $request->query('isDone');
+        return response()->json($this->service->listUserTasks($isDone));
     }
 
     /**
@@ -66,7 +68,7 @@ class TaskController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required|string',
-            'due_date' => 'required|date|after:today',
+            'due_date' => 'required|date',
             'description' => 'nullable|string',
         ]);
 

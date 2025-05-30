@@ -29,11 +29,12 @@ class TaskService
     /**
      * Lista as tarefas do usuário logado
      * 
+     * @param bool|null $isDone
      * @return Collection<int, Task>
      */
-    public function listUserTasks(): Collection
+    public function listUserTasks(bool|null $isDone): Collection
     {
-        return $this->repository->getAllByUser(Auth::id());
+        return $this->repository->getAllByUser(Auth::id(), $isDone);
     }
 
     /**
