@@ -1,11 +1,55 @@
-<div class="text-black">
-  <h2>Minhas Tarefas</h2>
+<div class="text-zinc-700 space-y-5">
   {{error}}
-  <form ng-submit="addTask()" ng-if="!editingTask">
-    <input type="text" placeholder="Título" ng-model="newTask.title" required />
-    <input type="text" placeholder="Descrição" ng-model="newTask.description" />
-    <input type="date" ng-model="newTask.due_date" />
-    <button type="submit">Adicionar</button>
+  <form
+    ng-submit="addTask()"
+    ng-if="!editingTask"
+    class="bg-white p-4 border border-zinc-900/10 rounded-lg shadow-md space-y-2"
+  >
+    <h2 class="text-[17px] font-semibold">Insira uma nova tarefa</h2>
+    <div class="flex gap-2">
+      <div class="flex flex-col gap-2 w-full">
+        <div class="flex gap-2">
+          <div class="w-full">
+            <input
+              type="text"
+              id="titulo"
+              ng-model="newTask.title"
+              class="bg-zinc-100 border border-zinc-200 text-zinc-800 text-sm rounded-lg block w-full p-2 focus:ring-zinc-400 focus:border-zinc-400 outline outline-0"
+              placeholder="Título"
+              required
+            />
+          </div>
+
+          <div>
+            <input
+              type="date"
+              id="titulo"
+              ng-model="newTask.due_date"
+              class="bg-zinc-100 border border-zinc-200 text-zinc-800 text-sm rounded-lg block w-full p-2 focus:ring-zinc-400 focus:border-zinc-400 outline outline-0"
+              required
+            />
+          </div>
+        </div>
+        <div>
+          <textarea
+            id="descricao"
+            class="bg-zinc-100 border border-zinc-200 text-zinc-800 text-sm rounded-lg block w-full p-2 focus:ring-zinc-400 focus:border-zinc-400 outline outline-0"
+            placeholder="Descreva a tarefa..."
+            ng-model="newTask.description"
+            rows="2"
+            required
+          ></textarea>
+        </div>
+      </div>
+      <div class="flex-1">
+        <button
+          class="w-full cursor-pointer rounded-lg bg-gradient-to-tr from-[#0e6e71] to-[#16b0b6] py-1.5 px-4 text-[18px] font-semibold text-white shadow-md shadow-[#0e6e71]/20 transition-all hover:shadow-lg hover:shadow-[#0e6e71]/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+          type="submit"
+        >
+          Adicionar
+        </button>
+      </div>
+    </div>
   </form>
 
   <form ng-submit="updateTask()" ng-if="editingTask">
@@ -16,8 +60,39 @@
     <button type="button" ng-click="cancelEdit()">Cancelar</button>
   </form>
 
+  <div class="flex gap-2">
+    <button
+      ng-class="filter === 'all' ? 'bg-[#16b0b6] text-zinc-100' : 'bg-zinc-100/80'"
+      class="px-2 py-1 rounded-full border border-zinc-900/20 shadow-md text-[14px] font-medium cursor-pointer transition-all hover:bg-[#16b0b6] hover:text-zinc-100"
+      type="button"
+    >
+      Todos
+    </button>
+    <button
+      ng-class="filter === 'completed' ? 'bg-[#16b0b6] text-zinc-100' : 'bg-zinc-100/80'"
+      class="px-2 py-1 rounded-full border border-zinc-900/20 shadow-md text-[14px] font-medium cursor-pointer transition-all hover:bg-[#16b0b6] hover:text-zinc-100"
+      type="button"
+    >
+      Concluídos
+    </button>
+  </div>
+
   <div class="flex flex-col gap-3">
-    <task-card ng-repeat="task in tasks" task="task"></task-card>
+    <div class="flex justify-center" ng-if="loading">
+      <img
+        class="w-28 opacity-80"
+        src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0Ij48Y2lyY2xlIGN4PSIxOCIgY3k9IjEyIiByPSIwIiBmaWxsPSIjM2YzZjQ2Ij48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJyIiBiZWdpbj0iLjY3IiBjYWxjTW9kZT0ic3BsaW5lIiBkdXI9IjEuNXMiIGtleVNwbGluZXM9IjAuMiAwLjIgMC40IDAuODswLjIgMC4yIDAuNCAwLjg7MC4yIDAuMiAwLjQgMC44IiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIgdmFsdWVzPSIwOzI7MDswIi8+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMCIgZmlsbD0iIzNmM2Y0NiI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49Ii4zMyIgY2FsY01vZGU9InNwbGluZSIgZHVyPSIxLjVzIiBrZXlTcGxpbmVzPSIwLjIgMC4yIDAuNCAwLjg7MC4yIDAuMiAwLjQgMC44OzAuMiAwLjIgMC40IDAuOCIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiIHZhbHVlcz0iMDsyOzA7MCIvPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjYiIGN5PSIxMiIgcj0iMCIgZmlsbD0iIzNmM2Y0NiI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49IjAiIGNhbGNNb2RlPSJzcGxpbmUiIGR1cj0iMS41cyIga2V5U3BsaW5lcz0iMC4yIDAuMiAwLjQgMC44OzAuMiAwLjIgMC40IDAuODswLjIgMC4yIDAuNCAwLjgiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiB2YWx1ZXM9IjA7MjswOzAiLz48L2NpcmNsZT48L3N2Zz4="
+        alt="loading-icon"
+      />
+    </div>
+    <p class="text-center" ng-if="tasks.length <= 0 && !loading">
+      Nenhuma tarefa encontrada.
+    </p>
+    <task-card
+      ng-if="tasks.length > 0 && !loading"
+      ng-repeat="task in tasks"
+      task="task"
+    ></task-card>
   </div>
 </div>
 

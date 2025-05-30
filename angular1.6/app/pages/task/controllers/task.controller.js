@@ -9,14 +9,22 @@ angular
       }
 
       $scope.error = "";
+      $scope.loading = false;
+      $scope.filter = 'all';
       $scope.tasks = [];
       $scope.newTask = {};
       $scope.editingTask = null;
 
       $scope.loadTasks = function () {
-        TaskService.all().then((res) => {
-          $scope.tasks = res.data;
-        });
+        $scope.loading = true;
+        TaskService.all()
+          .then((res) => {
+            $scope.loading = false;
+            $scope.tasks = res.data;
+          })
+          .catch((err) => {
+            $scope.loading = false;
+          });
       };
 
       $scope.addTask = function ($event) {
