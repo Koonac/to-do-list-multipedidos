@@ -10,7 +10,7 @@ angular.module("todoApp").config(function ($routeProvider) {
       template: "<task></task>",
     })
     .when("/usuario", {
-      template: "<task></task>",
+      template: "<user></user>",
     })
     .otherwise({ redirectTo: "/" });
 });

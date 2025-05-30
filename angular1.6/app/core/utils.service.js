@@ -8,9 +8,3 @@ angular.module("todoApp").service("UtilsService", function () {
   };
 });
 
-angular.module("todoApp").filter("brDate", function () {
-  return function (dateStr) {
-    const [year, month, day] = dateStr.split("-");
-    return `${day}/${month}/${year}`;
-  };
-});

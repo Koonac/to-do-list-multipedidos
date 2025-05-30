@@ -5,7 +5,7 @@ angular.module("todoApp").component("taskCard", {
     editTask: "&",
     task: "<",
   },
-  controller: function (TaskService, AuthService) {
+  controller: function (TaskService) {
     this.toggleDone = function () {
       this.task.is_done = !this.task.is_done;
       TaskService.update(this.task.id, {

@@ -103,6 +103,14 @@ angular
     }
 
     /**
+     * Retorna informações do usuário
+     * @returns {Promise}
+     */
+    function me() {
+      return $http.get(`${baseUrl}/me`);
+    }
+
+    /**
      * Agenda o token refresh
      */
     function scheduleTokenRefresh() {
@@ -144,6 +152,7 @@ angular
       login,
       logout,
       refreshToken,
+      me,
       scheduleTokenRefresh,
     };
   });

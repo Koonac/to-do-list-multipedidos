@@ -1,0 +1,19 @@
+<div
+  class="bg-white border border-zinc-900/10 rounded-lg shadow-md overflow-hidden transition-all p-5 text-zinc-700 space-y-4"
+>
+  <h2 class="font-medium text-[22px]">Informações do usuário</h2>
+  <div class="space-y-1">
+    <p>
+      <span class="font-medium text-[18px]">Cadastrado em:</span>
+      {{userInfo.created_at | brDateTime}}
+    </p>
+    <p>
+      <span class="font-medium text-[18px]">Nome:</span>
+      {{userInfo.name}}
+    </p>
+    <p>
+      <span class="font-medium text-[18px]">E-mail:</span>
+      {{userInfo.email}}
+    </p>
+  </div>
+</div>
