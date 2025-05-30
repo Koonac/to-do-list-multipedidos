@@ -24,6 +24,60 @@ Uma aplicação web de lista de tarefas construída com **Laravel 11** (API REST
 - PHP 8.2
 - Clean Architecture + princípios SOLID
 
+## 📦 Como rodar o projeto (via Docker)
+
+### 🔧 1. Clonar o repositório
+```bash
+git clone https://github.com/Koonac/to-do-list-multipedidos.git
+cd to-do-list-multipedidos
+```
+
+### 📄 2. Copiar o arquivo .env
+O .env.example já está configurado para rodar com Docker:
+
+```bash
+cp .env.example .env
+```
+
+### 🔍 3. Verificar arquivos Docker
+Antes de subir os containers, certifique-se de que:
+
+- O arquivo docker-compose.yml está adequado ao seu sistema (Linux, macOS, Windows).
+
+- O Dockerfile está compatível com sua versão do Docker.
+
+- As portas definidas no docker-compose.yml (ex: 8000, 3306, 4200) não estejam em uso.
+
+Se necessário, edite as portas no docker-compose.yml.
+
+### 🚀 4. Subir os containers
+```bash
+docker-compose up --build -d
+```
+
+### 📦 5. Instalar dependências PHP e Migrations
+Acesse o container do laravel:
+```bash
+# Acessando container
+docker exec -it laravel-app bash
+
+# Instalando dependências
+composer install
+
+# Rodando migrations
+php artisan migrate
+```
+
+### 🗃️ 6. Instalar pacotes npm
+Acesse o container do angular:
+```bash
+# Acessando container
+docker exec -it angular-app bash
+
+# Instalando dependências
+npm install
+```
+
 ---
 npm install em /angular1.6
 
