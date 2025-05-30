@@ -3,7 +3,7 @@ angular.module("todoApp").component("taskNewForm", {
   bindings: {
     loadTasks: "&",
   },
-  controller: function (TaskService) {
+  controller: function (TaskService, UtilsService) {
     this.error = "";
     this.newTask = {};
 
@@ -14,7 +14,7 @@ angular.module("todoApp").component("taskNewForm", {
       const data = {
         title: this.newTask.title,
         description: this.newTask.description,
-        due_date: new Date(this.newTask.due_date).toISOString().split("T")[0],
+        due_date: UtilsService.formatDateTimeToDate(this.newTask.due_date),
       };
 
       TaskService.create(data)

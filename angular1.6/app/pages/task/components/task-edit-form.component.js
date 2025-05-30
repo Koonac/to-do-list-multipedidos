@@ -5,7 +5,7 @@ angular.module("todoApp").component("taskEditForm", {
     cancelEdit: "&",
     loadTasks: "&",
   },
-  controller: function (TaskService) {
+  controller: function (TaskService, UtilsService) {
     this.error = "";
 
     this.updateTask = function () {
@@ -20,14 +20,11 @@ angular.module("todoApp").component("taskEditForm", {
       const data = {
         title: this.editingTask.title,
         description: this.editingTask.description,
-        due_date: new Date(this.editingTask.due_date)
-          .toISOString()
-          .split("T")[0],
+        due_date: UtilsService.formatDateTimeToDate(this.editingTask.due_date),
       };
 
       TaskService.update(this.editingTask.id, data)
         .then(() => {
-          this.editingTask = {};
           this.cancelEdit();
           this.loadTasks();
         })

@@ -2,7 +2,7 @@ angular
   .module("todoApp")
   .controller(
     "TaskController",
-    function ($scope, TaskService, AuthService, $location) {
+    function ($scope, TaskService, AuthService, UtilsService, $location) {
       if (!AuthService.isAuthenticated()) {
         $location.path("/");
         return;
@@ -28,6 +28,9 @@ angular
 
       $scope.editTask = function (task) {
         $scope.editingTask = angular.copy(task);
+        $scope.editingTask.due_date = UtilsService.formatDateToDateTime(
+          task.due_date
+        );
       };
 
       $scope.cancelEdit = function () {

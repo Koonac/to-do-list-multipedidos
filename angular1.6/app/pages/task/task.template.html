@@ -51,6 +51,7 @@
     </p>
     <task-card
       ng-if="tasks.length > 0 && !loading"
+      load-tasks="loadTasks()"
       ng-repeat="task in tasks"
       edit-task="editTask(task)"
       task="task"

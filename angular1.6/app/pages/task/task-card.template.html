@@ -50,7 +50,7 @@
           ng-class="{'line-through': $ctrl.task.is_done}"
           class="text-[16px] text-zinc-700/50 decoration-[#FF6400]"
         >
-          {{$ctrl.task.due_date}}
+          {{ $ctrl.task.due_date | brDate }}
         </p>
 
         <p

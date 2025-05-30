@@ -1,16 +1,16 @@
 angular.module("todoApp").component("taskCard", {
   templateUrl: "app/pages/task/task-card.template.html",
   bindings: {
+    loadTasks: "&",
     editTask: "&",
     task: "<",
   },
-  controller: function (TaskService) {
+  controller: function (TaskService, AuthService) {
     this.toggleDone = function () {
       this.task.is_done = !this.task.is_done;
       TaskService.update(this.task.id, {
         is_done: this.task.is_done,
-      }).then(() => {
-      });
+      }).then(() => {});
     };
 
     this.deleteTask = function () {
