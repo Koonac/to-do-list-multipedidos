@@ -4,8 +4,9 @@ angular
     "LayoutController",
     function ($location, $rootScope, AuthService) {
       const lc = this;
+      const pagesWithoutLayout = ["/", "/registrar"];
 
-      lc.isLoginPage = $location.path() === "/";
+      lc.showLayout = !pagesWithoutLayout.includes($location.path());
       lc.path = $location.path();
       lc.hideMenu = true;
 
@@ -15,7 +16,7 @@ angular
 
       $rootScope.$on("$routeChangeSuccess", function () {
         lc.path = $location.path();
-        lc.isLoginPage = $location.path() === "/";
+        lc.showLayout = !pagesWithoutLayout.includes($location.path());
       });
 
       lc.redirecionar = function (page) {

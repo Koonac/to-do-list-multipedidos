@@ -3,7 +3,7 @@ angular.module("todoApp", ["ngRoute"]).config(function ($httpProvider) {
 });
 
 angular.module("todoApp").run(function ($rootScope, $location, AuthService) {
-  const publicRoutes = ["/", "/registro"];
+  const publicRoutes = ["/", "/registrar"];
 
   /**
    * Responsável por validar o acesso as rotas

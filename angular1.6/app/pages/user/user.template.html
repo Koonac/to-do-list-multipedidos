@@ -2,7 +2,14 @@
   class="bg-white border border-zinc-900/10 rounded-lg shadow-md overflow-hidden transition-all p-5 text-zinc-700 space-y-4"
 >
   <h2 class="font-medium text-[22px]">Informações do usuário</h2>
-  <div class="space-y-1">
+  <div class="flex justify-center" ng-if="loading">
+    <img
+      class="w-28 opacity-80"
+      src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDI0IDI0Ij48Y2lyY2xlIGN4PSIxOCIgY3k9IjEyIiByPSIwIiBmaWxsPSIjM2YzZjQ2Ij48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJyIiBiZWdpbj0iLjY3IiBjYWxjTW9kZT0ic3BsaW5lIiBkdXI9IjEuNXMiIGtleVNwbGluZXM9IjAuMiAwLjIgMC40IDAuODswLjIgMC4yIDAuNCAwLjg7MC4yIDAuMiAwLjQgMC44IiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIgdmFsdWVzPSIwOzI7MDswIi8+PC9jaXJjbGU+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMCIgZmlsbD0iIzNmM2Y0NiI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49Ii4zMyIgY2FsY01vZGU9InNwbGluZSIgZHVyPSIxLjVzIiBrZXlTcGxpbmVzPSIwLjIgMC4yIDAuNCAwLjg7MC4yIDAuMiAwLjQgMC44OzAuMiAwLjIgMC40IDAuOCIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiIHZhbHVlcz0iMDsyOzA7MCIvPjwvY2lyY2xlPjxjaXJjbGUgY3g9IjYiIGN5PSIxMiIgcj0iMCIgZmlsbD0iIzNmM2Y0NiI+PGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iciIgYmVnaW49IjAiIGNhbGNNb2RlPSJzcGxpbmUiIGR1cj0iMS41cyIga2V5U3BsaW5lcz0iMC4yIDAuMiAwLjQgMC44OzAuMiAwLjIgMC40IDAuODswLjIgMC4yIDAuNCAwLjgiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiB2YWx1ZXM9IjA7MjswOzAiLz48L2NpcmNsZT48L3N2Zz4="
+      alt="loading-icon"
+    />
+  </div>
+  <div class="space-y-1" ng-if="!loading">
     <p>
       <span class="font-medium text-[18px]">Cadastrado em:</span>
       {{userInfo.created_at | brDateTime}}

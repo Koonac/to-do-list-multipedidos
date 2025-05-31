@@ -3,6 +3,9 @@ angular.module("todoApp").config(function ($routeProvider) {
     .when("/", {
       template: "<login></login>",
     })
+    .when("/registrar", {
+      template: "<register></register>",
+    })
     .when("/inicio", {
       template: "<home></home>",
     })

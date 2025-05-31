@@ -5,25 +5,49 @@
     <div>
       <img src="app/assets/images/logo-branco.png" alt="logo-branco" />
     </div>
-    <form ng-submit="login()" class="p-4 space-y-2">
+    <form ng-submit="register()" class="p-4 space-y-2">
       <div class="flex flex-col">
+        <div>
+          <label for="name" class="text-sm font-medium">Nome</label>
+          <input
+            type="text"
+            id="name"
+            ng-model="formRegister.name"
+            class="bg-zinc-100 border border-zinc-200 text-zinc-800 text-sm rounded-lg block w-full p-2 focus:ring-zinc-400 focus:border-zinc-400 outline outline-0"
+            placeholder="Exemplo"
+            required
+          />
+        </div>
         <div>
           <label for="email" class="text-sm font-medium">E-mail</label>
           <input
             type="text"
             id="email"
-            ng-model="formLogin.email"
+            ng-model="formRegister.email"
             class="bg-zinc-100 border border-zinc-200 text-zinc-800 text-sm rounded-lg block w-full p-2 focus:ring-zinc-400 focus:border-zinc-400 outline outline-0"
             placeholder="exemplo@exemplo.com"
             required
           />
         </div>
         <div>
-          <label for="senha" class="text-sm font-medium">Senha</label>
+          <label for="password" class="text-sm font-medium">Senha</label>
           <input
             type="password"
-            id="senha"
-            ng-model="formLogin.password"
+            id="password"
+            ng-model="formRegister.password"
+            class="bg-zinc-100 border border-zinc-200 text-zinc-800 text-sm rounded-lg block w-full p-2 focus:ring-zinc-400 focus:border-zinc-400 outline outline-0"
+            placeholder="****"
+            required
+          />
+        </div>
+        <div>
+          <label for="passwordConfirmation" class="text-sm font-medium">
+            Confirme sua senha
+          </label>
+          <input
+            type="password"
+            id="passwordConfirmation"
+            ng-model="formRegister.password_confirmation"
             class="bg-zinc-100 border border-zinc-200 text-zinc-800 text-sm rounded-lg block w-full p-2 focus:ring-zinc-400 focus:border-zinc-400 outline outline-0"
             placeholder="****"
             required
@@ -35,18 +59,18 @@
           class="w-full cursor-pointer rounded-lg bg-gradient-to-tr from-[#0e6e71] to-[#16b0b6] py-2 px-4 text-[18px] font-semibold text-white shadow-md shadow-[#0e6e71]/20 transition-all hover:shadow-lg hover:shadow-[#0e6e71]/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
           type="submit"
         >
-          Entrar
+          Registrar
         </button>
       </div>
       <div class="flex justify-end">
         <p class="text-zinc-100/70 text-sm">
-          Clique aqui para se
           <a
             class="cursor-pointer underline underline-offset-2 font-medium"
-            ng-click="redirecionar('/registrar')"
+            ng-click="redirecionar()"
           >
-            registrar!
+            Clique aqui
           </a>
+          se já tem cadastro
         </p>
       </div>
       <div>

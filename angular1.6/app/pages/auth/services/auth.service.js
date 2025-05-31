@@ -73,6 +73,22 @@ angular
     }
 
     /**
+     * Realiza o registro de um novo usuário
+     * @param {object} data
+     * @returns {Promise}
+     */
+    function register(data) {
+      return $http
+        .post(`${baseUrl}/register`, data)
+        .then((res) => {
+          saveToken(res.data.access_token, res.data.expires_in);
+        })
+        .catch((err) => {
+          return $q.reject(err);
+        });
+    }
+
+    /**
      * Realiza o logout do usuário
      */
     function logout() {
@@ -141,6 +157,7 @@ angular
       getToken,
       isAuthenticated,
       login,
+      register,
       logout,
       refreshToken,
       me,
