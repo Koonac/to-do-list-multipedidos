@@ -71,11 +71,8 @@ php artisan migrate
 ```
 
 ### 🗃️ 6. Instalar pacotes npm
-Acesse o container do angular:
+Acesse a pasta do angular `...\to-do-list-multipedidos\angular1.6`:
 ```bash
-# Acessando container
-docker exec -it angular-app bash
-
 # Instalando dependências
 npm install
 ```
